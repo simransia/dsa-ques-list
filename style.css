@@ -384,13 +384,17 @@ header {
 }
 
 .accordion-item:hover {
-  border-color: var(--card-hover-border); /* GitHub Dark hovered border (#8b949e) */
+  border-color: var(
+    --card-hover-border
+  ); /* GitHub Dark hovered border (#8b949e) */
   background: #21262d; /* GitHub Dark hover container background */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .accordion-item.expanded {
-  border-color: var(--primary); /* Highlight with brand blue (#58a6ff) when expanded */
+  border-color: var(
+    --primary
+  ); /* Highlight with brand blue (#58a6ff) when expanded */
   background: var(--card-bg);
   box-shadow: 0 8px 24px rgba(88, 166, 255, 0.05);
 }
@@ -517,7 +521,7 @@ td {
 }
 
 .question-row:hover {
-  background-color: rgba(255, 255, 255, 0.015);
+  background-color: rgba(255, 255, 255, 0.06); /* Properly visible row highlight in dark mode */
 }
 
 /* Question Text Styling */
@@ -741,16 +745,18 @@ td:nth-child(3) {
 .company-tag {
   font-size: 0.65rem;
   font-weight: 500;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary); /* #8b949e — readable on dark bg */
+  background: rgba(255, 255, 255, 0.07); /* Clearly visible tag background */
   padding: 0.05rem 0.35rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.12); /* Defined pill border */
+  transition: color 0.15s, background 0.15s;
 }
 
 .question-row:hover .company-tag {
-  color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary); /* Full brightness on row hover */
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* Highlight matching search text */
@@ -891,4 +897,130 @@ td:nth-child(3) {
   color: #ffffff !important;
   border-color: var(--primary) !important;
   box-shadow: 0 0 12px var(--primary-glow) !important;
+}
+
+/* =============================================
+   🌙 / ☀️  THEME TOGGLE BUTTON
+   ============================================= */
+#theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#theme-toggle:hover {
+  background: var(--bg-secondary);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: scale(1.1) rotate(12deg);
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+#theme-toggle svg {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* =============================================
+   ☀️  LIGHT THEME  (GitHub Light palette)
+   ============================================= */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f8fa;
+  --card-bg: #f6f8fa;
+  --card-border: #d0d7de;
+  --card-hover-border: #0969da;
+
+  --text-primary: #1f2328;
+  --text-secondary: #636c76;
+  --text-muted: #a0adb9;
+
+  --primary: #0969da; /* GitHub Light brand blue */
+  --primary-glow: rgba(9, 105, 218, 0.2);
+
+  /* Keep neon accent colors vivid but slightly adapted for light bg */
+  --success: #1a7f37; /* GitHub green for light mode */
+  --success-glow: rgba(26, 127, 55, 0.25);
+  --warning: #9a6700; /* GitHub attention orange-yellow for light mode */
+  --warning-glow: rgba(154, 103, 0, 0.25);
+  --danger: #cf222e; /* GitHub danger red for light mode */
+  --danger-glow: rgba(207, 34, 46, 0.25);
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .accordion-title {
+  color: #1f2328; /* Dark text on light background */
+}
+
+[data-theme="light"] .accordion-content {
+  background: #ffffff;
+}
+
+[data-theme="light"] th {
+  background: #f6f8fa;
+  color: #636c76;
+  border-bottom-color: #d0d7de;
+}
+
+[data-theme="light"] td {
+  border-bottom-color: #d0d7de;
+}
+
+[data-theme="light"] .question-row:hover {
+  background-color: #eaf5ff;
+}
+
+[data-theme="light"] .progress-bar-container {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: #d0d7de;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f6f8fa;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #d0d7de;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #a0adb9;
+}
+
+[data-theme="light"] .difficulty-hard {
+  color: #cf222e;
+  background: rgba(207, 34, 46, 0.08);
+  border-color: rgba(207, 34, 46, 0.25);
+}
+
+[data-theme="light"] .difficulty-medium {
+  color: #9a6700;
+  background: rgba(154, 103, 0, 0.08);
+  border-color: rgba(154, 103, 0, 0.2);
+}
+
+[data-theme="light"] .difficulty-easy {
+  color: #1a7f37;
+  background: rgba(26, 127, 55, 0.08);
+  border-color: rgba(26, 127, 55, 0.2);
 }
