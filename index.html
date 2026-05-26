@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSA Quest - Assignment Progress Tracker</title>
+    <meta
+      name="description"
+      content="A premium, interactive dark-mode dashboard to track your progress through Kunal Kushwaha's DSA Bootcamp assignments. Persists progress, supports bookmarks, filtering, and instant search."
+    />
+
+    <!-- SEO & Icons -->
+    <link rel="icon" type="image/png" href="logo.png" />
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Hero Header -->
+      <header>
+        <h1 class="hero-title">
+          <img
+            src="logo.png"
+            alt="DSA Quest Logo"
+            class="hero-logo"
+            style="width: 52px; height: 52px; object-fit: contain"
+          />
+          <span class="glow">DSA Questions</span>
+        </h1>
+        <p class="hero-subtitle">
+          Interactive progress tracker for
+          <a
+            href="https://github.com/kunal-kushwaha/DSA-Bootcamp-Java/tree/main/assignments"
+            target="_blank"
+            rel="noopener noreferrer"
+            >DSA Questions</a
+          >.
+        </p>
+      </header>
+
+      <!-- Overall Progress Gauge Card -->
+      <section
+        class="progress-card"
+        id="overall-progress-card"
+        aria-label="Overall Progress"
+      >
+        <div class="progress-info">
+          <div class="progress-title">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: var(--primary)"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Overall Completion
+          </div>
+          <div class="progress-count" id="progress-count" aria-live="polite">
+            0 of 602 Completed
+          </div>
+        </div>
+
+        <div
+          class="progress-bar-container"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+        >
+          <div
+            class="progress-bar-fill"
+            id="progress-bar-fill"
+            style="width: 0%"
+          >
+            <span class="progress-bar-text">0%</span>
+          </div>
+        </div>
+
+        <!-- <div class="progress-actions">
+          <button
+            class="btn btn-reset"
+            id="reset-btn"
+            title="Clear all local data and reset progress"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+              ></path>
+              <polyline points="3 3 3 8 8 8"></polyline>
+            </svg>
+            Reset All Progress
+          </button>
+        </div> -->
+      </section>
+
+      <!-- Control Filters Bar -->
+      <section
+        class="controls-bar"
+        id="controls-section"
+        aria-label="Search and Filter Controls"
+      >
+        <!-- Live Search Box -->
+        <div class="search-wrapper">
+          <svg
+            class="search-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            id="search-input"
+            placeholder="Search questions, companies, topics..."
+            aria-label="Search questions"
+          />
+        </div>
+
+        <div class="filter-group">
+          <div class="tabs tab-group-status" role="tablist">
+            <button
+              class="tab active"
+              data-filter="all"
+              role="tab"
+              aria-selected="true"
+            >
+              All
+            </button>
+            <button
+              class="tab"
+              data-filter="completed"
+              role="tab"
+              aria-selected="false"
+            >
+              Done
+            </button>
+            <button
+              class="tab"
+              data-filter="pending"
+              role="tab"
+              aria-selected="false"
+            >
+              Todo
+            </button>
+            <button
+              class="tab tab-bookmark"
+              data-filter="bookmarked"
+              role="tab"
+              aria-selected="false"
+            >
+              ⭐ Revision
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div
+            style="display: flex; align-items: center; gap: 0.5rem; width: 100%"
+          >
+            <div
+              class="tabs tab-group-difficulty"
+              role="tablist"
+              style="flex: 1"
+            >
+              <button
+                class="tab active"
+                data-filter="all"
+                role="tab"
+                aria-selected="true"
+              >
+                All
+              </button>
+              <button
+                class="tab"
+                data-filter="easy"
+                role="tab"
+                aria-selected="false"
+              >
+                Easy
+              </button>
+              <button
+                class="tab"
+                data-filter="medium"
+                role="tab"
+                aria-selected="false"
+              >
+                Medium
+              </button>
+              <button
+                class="tab"
+                data-filter="hard"
+                role="tab"
+                aria-selected="false"
+              >
+                Hard
+              </button>
+            </div>
+
+            <button
+              class="tab"
+              id="toggle-all-btn"
+              title="Expand or Collapse all folders"
+              style="
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                padding: 0;
+                border-radius: 8px;
+              "
+            >
+              <!-- SVG icon filled dynamically -->
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expandable Accordion Topics List -->
+      <main
+        class="accordion-list"
+        id="accordion-list"
+        aria-label="DSA Topic Folders"
+      >
+        <!-- Dynamically filled by app.js -->
+      </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Back to Top">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+
+    <!-- Javascript Question Database -->
+    <script src="questions.js"></script>
+
+    <!-- Interactive Controller Script -->
+    <script src="app.js"></script>
+  </body>
+</html>

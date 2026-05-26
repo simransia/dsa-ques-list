@@ -1,0 +1,894 @@
+/* Modern Premium Dark-Theme CSS for DSA Tracker */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --bg-primary: #0d1117; /* GitHub Dark body background */
+  --bg-secondary: #161b22; /* GitHub Dark secondary container */
+  --card-bg: #161b22; /* GitHub Dark card fill */
+  --card-border: #30363d; /* GitHub Dark border */
+  --card-hover-border: #8b949e; /* GitHub Dark hovered border */
+
+  --text-primary: #c9d1d9; /* GitHub Dark main text */
+  --text-secondary: #8b949e; /* GitHub Dark secondary text */
+  --text-muted: #484f58; /* GitHub Dark muted text */
+
+  --primary: #58a6ff; /* GitHub Dark electric brand blue */
+  --primary-glow: rgba(88, 166, 255, 0.2);
+  --success: #00f713; /* Keep neon green checkbox exactly as requested */
+  --success-glow: rgba(0, 247, 19, 0.4);
+  --warning: #fff309; /* Keep neon yellow star exactly as requested */
+  --warning-glow: rgba(255, 243, 9, 0.4);
+  --danger: #f70000; /* Keep neon red hard pill exactly as requested */
+  --danger-glow: rgba(247, 0, 0, 0.4);
+  --cyan: #06b6d4;
+  --cyan-glow: rgba(6, 182, 212, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  padding: 2.5rem 1.5rem;
+  overflow-y: scroll;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Hero Header */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  background: linear-gradient(
+    135deg,
+    #ffffff 40%,
+    #7dd3fc 100%
+  ); /* White to light Sky Blue gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero-title span.glow {
+  text-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+}
+
+.hero-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(
+    0 0 12px rgba(125, 211, 252, 0.25)
+  ); /* Gorgeous soft sky blue glow */
+  animation: logoFloat 4s ease-in-out infinite; /* Premium gentle hover animation */
+  -webkit-text-fill-color: initial; /* Ensure logo image is 100% solid colored */
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-subtitle a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.hero-subtitle a:hover {
+  color: #818cf8;
+  text-decoration: underline;
+}
+
+/* Overall Progress Card */
+.progress-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: border 0.3s;
+}
+
+.progress-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  background: #2f3034;
+  border-radius: 50px;
+  height: 24px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+  box-shadow: 0 0 12px var(--success-glow);
+  border-radius: 50px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.75rem;
+}
+
+.progress-bar-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Action Controls Inside Progress Card */
+.progress-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: rgba(30, 41, 59, 0.9);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-reset {
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-reset:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fff;
+  border-color: var(--danger);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.25);
+}
+
+/* Controls & Filter Bar */
+.controls-bar {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .controls-bar {
+    grid-template-columns: 1fr 1fr 1fr; /* Set three columns to be exactly equal width */
+    align-items: center;
+    gap: 1.5rem; /* Precise and balanced identical gaps between columns */
+  }
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: #111420;
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.65rem 1rem 0.65rem 2.5rem;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.filter-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.tabs {
+  display: flex;
+  background: #111420;
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  gap: 0.15rem;
+  width: 100%; /* Stretch tabs container to fill the full width of grid columns */
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.45rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
+}
+
+.tab-bookmark.active {
+  background: var(--warning);
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+}
+
+/* Accordion Topics List */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accordion-item {
+  background: var(--card-bg); /* GitHub Dark container background (#161b22) */
+  border: 1px solid var(--card-border); /* GitHub Dark border color (#30363d) */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item:hover {
+  border-color: var(--card-hover-border); /* GitHub Dark hovered border (#8b949e) */
+  background: #21262d; /* GitHub Dark hover container background */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.accordion-item.expanded {
+  border-color: var(--primary); /* Highlight with brand blue (#58a6ff) when expanded */
+  background: var(--card-bg);
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.05);
+}
+
+/* Accordion Header */
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+}
+
+.accordion-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.accordion-chevron {
+  color: var(--text-secondary);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.expanded .accordion-chevron {
+  transform: rotate(90deg);
+}
+
+.accordion-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff; /* Pure white for high-contrast crisp readability */
+}
+
+.accordion-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topic-progress-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.topic-percent-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.topic-percent-badge.started {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.topic-percent-badge.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.15);
+}
+
+/* Accordion Content Body */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 1px solid transparent;
+  background: #0d1117; /* Deep, neutral GitHub Dark body background for recessed contrast */
+}
+
+.accordion-item.expanded .accordion-content {
+  border-top-color: var(--card-border);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Table Design */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  font-size: 0.58rem; /* Sleek micro-typography font size to completely eliminate overlap */
+  font-weight: 500; /* Font weight normal as requested */
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em; /* Slightly wider spacing for premium micro-typography */
+  padding: 0.75rem 1.25rem;
+  background: #161b22; /* Matches the GitHub Dark container background */
+  border-bottom: 1px solid var(--card-border);
+}
+
+td {
+  padding: 0.85rem 1.25rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 0.9rem;
+}
+
+.question-row {
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
+}
+
+.question-row:hover {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+/* Question Text Styling */
+.question-text {
+  font-size: 0.98rem; /* Increased font size for better legibility */
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+/* Completed Row Styling */
+.question-row.done {
+  /* Keep icons and interactive elements at 100% brightness */
+}
+
+.question-row.done .question-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Status Column Checked Circle */
+.checkbox-cell {
+  width: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  padding: 0.75rem 0 0.75rem 20px !important; /* Pushed exactly 20px from left border to match table structure */
+  text-align: left !important;
+}
+
+/* Third column spacing rule to make the gaps mathematically equivalent */
+th:nth-child(3),
+td:nth-child(3) {
+  padding-left: 40px !important;
+}
+
+.checkbox-custom {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px !important;
+  height: 22px !important;
+  cursor: pointer;
+  background: transparent;
+  border: none !important; /* Pure SVG borders to match reference checkbox perfectly */
+}
+
+.checkbox-custom svg {
+  width: 22px !important;
+  height: 22px !important;
+  overflow: visible !important;
+}
+
+.checkbox-circle {
+  stroke: var(--text-muted);
+  stroke-width: 2.5px;
+  fill: none;
+  stroke-linecap: round;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkbox-check {
+  stroke: var(--success);
+  stroke-width: 2.5px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  transition: stroke-dashoffset 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkbox-custom:hover .checkbox-circle {
+  stroke: var(--primary); /* Neon cyber blue on hover */
+}
+
+.question-row.done .checkbox-circle {
+  stroke: var(--success); /* Solid unbroken green border on checked state */
+}
+
+.question-row.done .checkbox-check {
+  stroke-dashoffset: 0; /* Draw in checkmark beautifully! */
+}
+
+/* Bookmark Column Star Button */
+.bookmark-cell {
+  width: 65px !important;
+  min-width: 65px !important;
+  max-width: 65px !important;
+  padding: 0.75rem 0 !important;
+  text-align: center !important;
+}
+
+.bookmark-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+}
+
+.bookmark-btn svg {
+  width: 22px !important;
+  height: 22px !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bookmark-btn:hover {
+  color: var(--warning);
+  transform: scale(1.25);
+}
+
+.bookmark-btn.active {
+  color: var(--warning);
+}
+
+.bookmark-btn.active svg {
+  fill: var(--warning);
+  stroke: var(--warning);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.difficulty-easy {
+  color: var(--success);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.difficulty-medium {
+  color: var(--warning);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+.difficulty-hard {
+  color: #ff3e3e; /* High-contrast bright neon red that pops beautifully on dark themes */
+  background: rgba(247, 0, 0, 0.1);
+  border: 1px solid rgba(247, 0, 0, 0.35); /* Crisp, visible border matching the Medium pill */
+}
+
+.platform-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  color: #38bdf8; /* Sleek default sky-blue text color for promoted platforms */
+  background: rgba(
+    56,
+    189,
+    248,
+    0.08
+  ); /* Sleek default sky-blue bg for promoted platforms */
+}
+
+.platform-leetcode {
+  color: var(--cyan);
+  background: rgba(6, 182, 212, 0.08);
+}
+
+.platform-geeksforgeeks {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.platform-other {
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.08);
+}
+
+/* Action Links inside Table */
+.action-link {
+  color: #ffffff; /* Pure white link icon color by default */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.action-link:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.action-link.video-link:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+/* Company Tags list */
+.company-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.3rem;
+}
+
+.company-tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.01);
+}
+
+.question-row:hover .company-tag {
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Highlight matching search text */
+.highlight {
+  background: rgba(99, 102, 241, 0.3);
+  color: #fff;
+  padding: 0 0.1rem;
+  border-radius: 2px;
+}
+
+/* Zero Questions Found Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.empty-state svg {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Multi-Video Topic Links in Accordion Header */
+.header-video-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 4px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.header-video-badge:hover {
+  transform: translateY(-1px) scale(1.18);
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.65));
+}
+
+.video-playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem 0.5rem;
+  background: rgba(13, 20, 38, 0.2);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.playlist-video-link {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+}
+
+.playlist-video-link:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fff;
+  border-color: var(--danger);
+}
+
+/* Floating Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #0284c7; /* Darker Sky Blue for hover accent */
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 6px 25px rgba(14, 165, 233, 0.6);
+}
+
+.back-to-top svg {
+  animation: bounce-up-down 2s infinite ease-in-out;
+}
+
+@keyframes bounce-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Highlighted Folders Action Button Override */
+#toggle-all-btn {
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  flex: none !important; /* Force it to never grow or stretch inside flex containers! */
+  background: rgba(14, 165, 233, 0.07) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(14, 165, 233, 0.2) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#toggle-all-btn:hover {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 12px var(--primary-glow) !important;
+}
